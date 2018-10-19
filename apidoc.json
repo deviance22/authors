@@ -1,0 +1,7 @@
+{
+  "name": "Author Lumen",
+  "version": "0.1.0",
+  "description": "Sample code on using lumen framework. Manages authors.",
+  "title": "Author API Documentation",
+  "url" : "https://api.github.com/v1"
+}
