@@ -12,7 +12,7 @@ class AuthorController extends Controller
      *
      * @apiError AuthorNotFoundError The id of the Author was not found.
      *
-     * @apiErrorExample Error-Response:
+     * @apiErrorExample Not Found Error:
      *     HTTP/1.1 404 Not Found
      *     {
      *       "error": "AuthorNotFoundError"
@@ -24,7 +24,7 @@ class AuthorController extends Controller
       *
       * @apiError MethodNotAllowedError Method Not Allowed
       *
-      * @apiErrorExample Error-Response:
+      * @apiErrorExample Method not Allowed:
       *     HTTP/1.1 405 Method not Allowed
       *     {
       *       "error": "MethodNotAllowedError"
@@ -36,7 +36,7 @@ class AuthorController extends Controller
       *
       * @apiError ForbiddenAccessError You are not authorized to access this page
       *
-      * @apiErrorExample Error-Response:
+      * @apiErrorExample Forbidden Access:
       *     HTTP/1.1 403 Forbidden
       *     {
       *       "error": "ForbiddenAccessError"
@@ -119,11 +119,11 @@ class AuthorController extends Controller
      * @apiName create
      * @apiGroup authors
      *
-     * @apiParam {String} name Name of the Author
-     * @apiParam {String} email E-mail of the Author
+     * @apiParam {String} name Name of the Author [Required]
+     * @apiParam {String} email E-mail of the Author [Required]
      * @apiParam {String} github Github link of the Author
      * @apiParam {String} twitter Twitter Handle of the Author
-     * @apiParam {String} location Location of the Author
+     * @apiParam {String} location Location of the Author [Required]
      * @apiParam {String} latest_article_published Title of the last article publihed by the author
      *
      * @apiParamExample {json} Request-Example:
@@ -155,6 +155,21 @@ class AuthorController extends Controller
      *
      * @apiUse ForbiddenAccessError
      * @apiUse MethodNotAllowedError
+     * @apiError MissingFieldsError
+     *
+     * @apiErrorExample Missing Fields:
+     *     HTTP/1.1 422 Unprocessable Entity
+     *     {
+     *         "name": [
+     *            "The name field is required."
+     *         ],
+     *         "email": [
+     *            "The email field is required."
+     *         ],
+     *         "location": [
+     *             "The location field is required."
+     *         ]
+     *     }
      */
     public function create(Request $request)
     {
